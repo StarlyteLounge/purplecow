@@ -16,9 +16,10 @@ def web_items():
     try:
         if request.method == 'POST':
             item_list = list(request.get_json())
-            print(type(item_list))
-            cache.set('db',item_list)
-            print(item_list)
+            items = [Item(ident,name) for ident, name in item_list]
+            print(type(items))
+            cache.set('db',items)
+            print(items)
             return 'post complete'
 
         elif request.method == 'GET':
