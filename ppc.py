@@ -2,6 +2,10 @@ from flask import Flask, request, jsonify
 from cache import cache
 from pathlib import Path
 
+class Item():
+    def __init__(self, identifier, name):
+        self.identifier = identifier
+        self.name = name
 
 app = Flask(__name__)
 
