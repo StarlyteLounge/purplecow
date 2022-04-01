@@ -21,8 +21,7 @@ def web_items():
             print('processing GET')
             items = cache.get('db')
             print(items)
-            #print(f'items is truthy {items}' if items else f'Items is falsey {items}')
-            return str(items), 200 if items else 'no items'
+            return str(items)
 
         elif request.method == 'DELETE':
             cache.clear()
