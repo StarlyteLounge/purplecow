@@ -1,9 +1,11 @@
 from flask import Flask, request, jsonify
+from cache import cache
+from pathlib import Path
 
 
 app = Flask(__name__)
 
-items = {'a':1,'b':2}
+cache.init_app(app=app, config={'CACHE_TYPE': 'filesystem', 'CACHE_DIR': Path('/tmp')})
 
 @app.route('/items',methods = ['POST', 'GET', 'DELETE'])
 def web_items():
@@ -11,17 +13,19 @@ def web_items():
         if request.method == 'POST':
             item_list = list(request.get_json())
             print(type(item_list))
+            cache.set('db',item_list)
             print(item_list)
             return 'post complete'
 
         elif request.method == 'GET':
             print('processing GET')
+            items = cache.get('db')
             print(items)
-            return items, 200 if items else 'no items'
+            #print(f'items is truthy {items}' if items else f'Items is falsey {items}')
+            return str(items), 200 if items else 'no items'
 
         elif request.method == 'DELETE':
-            item_list.clear()
-            print(item_list)
+            cache.clear()
             print('deleted cache:')
             return 'items have been discarded'
 
