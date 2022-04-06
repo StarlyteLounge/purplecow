@@ -1,5 +1,5 @@
 # Purple Cow Project
-As part of a larger project, there needed to be a proof-of-concept microservice that accepted JSON data to identify and catalog people. Each person would be given an unique ID that is associated with their name.
+As part of a larger project, there needed to be a proof-of-concept microservice that accepts JSON data to identify and catalog people. Each person would be given an unique ID that is associated with their name.
 
 ## Install and Run
 ### Install
