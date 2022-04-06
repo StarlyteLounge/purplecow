@@ -13,7 +13,7 @@ app = Flask(__name__)
 
 cache.init_app(app=app, config={'CACHE_TYPE': 'filesystem', 'CACHE_DIR': Path('/tmp')})
 
-@app.route('/people',methods = ['POST', 'GET', 'DELETE'])
+@app.route('/items',methods = ['POST', 'GET', 'DELETE'])
 def web_people():
     try:
         if request.method == 'POST':
