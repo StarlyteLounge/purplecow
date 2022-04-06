@@ -27,7 +27,6 @@ def test():
 
 def test_items(client):
     '''monolithic test for all test cases. TODO divide into smaller test cases'''
-    print("starting the fucking test")
     response = client.post('/items', 
             json={
                     'items': [
@@ -47,5 +46,4 @@ def test_items(client):
                  }
             )
     print(response.request.path)
-    print("the fucking test is finished")
 """
