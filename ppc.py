@@ -1,5 +1,6 @@
 #! /usr/bin/env python3
 
+import json
 from flask import Flask, request, jsonify
 from cache import cache
 from pathlib import Path
@@ -10,6 +11,7 @@ class Item():
 
 
 app = Flask(__name__)
+app.config.from_file("settings.cfg", load=json.load)
 
 cache.init_app(app=app, config={'CACHE_TYPE': 'filesystem', 'CACHE_DIR': Path('/tmp')})
 
