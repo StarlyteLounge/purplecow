@@ -1,22 +1,51 @@
-import ppc
-import unittest
+from ppc import web_people
+import pytest
+
+@pytest.fixture()
+def app():
+    app = web_people()
+    app.config.update({
+                "TESTING": True,
+                      })
+
+    # other setup can go here
+
+    yield app
+
+    # clean up / reset resources here
 
 
-class PpcTestCase(unittest.TestCase):
-    def setUp(self):
-        ppc.app.testing = True
-        self.app = ppc.app.test_client()
+@pytest.fixture()
+def client(app):
+    return app.test_client()
 
-    def test_items(self):
-        result = self.app.post('/items', data="[{'a':1}, {'b':2}, {'c':'third'}]")
-        self.assertEqual(result,'post complete')
+def test():
+    response = web_people().test_client().post('/items', json='[{"id":1001, "name":"Silly Format"}, {"id": 1002, "name":"42"}, {"id": 1003, "name":"mature"}]')
+    print(response)
 
-        result = self.app.get('/items')
-        self.assertEqual(result, "[{'a':1}, {'b':2}, {'c':'third'}]")
+"""
 
-        result = self.app.delete('/items')
-        self.assertEqual(result, 'items have been discarded')
-
-        result = self.app.get('/items')
-        self.assertEqual(result, 'no items')
-        
+def test_items(client):
+    '''monolithic test for all test cases. TODO divide into smaller test cases'''
+    print("starting the fucking test")
+    response = client.post('/items', 
+            json={
+                    'items': [
+                        {
+                            'id':'1',
+                            'name':'a'
+                        },
+                        {
+                            'id':'2',
+                            'name':'b'
+                        },
+                        {
+                            'id':'3',
+                            'name':'c'
+                        }
+                     ]
+                 }
+            )
+    print(response.request.path)
+    print("the fucking test is finished")
+"""
