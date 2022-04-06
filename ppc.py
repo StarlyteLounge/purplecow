@@ -11,7 +11,7 @@ class Item():
 
 
 app = Flask(__name__)
-app.config.from_file("settings.cfg", load=json.load)
+app.config.from_file('settings.cfg', load=json.load)
 
 cache.init_app(app=app, config={'CACHE_TYPE': 'filesystem', 'CACHE_DIR': Path('/tmp')})
 
