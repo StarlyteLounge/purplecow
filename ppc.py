@@ -20,11 +20,9 @@ def web_people():
             '''POST requires a list of dicts, each dict contains values for "id" and "name"'''
             people = list(request.get_json())
             print(people)
-            #print([f'{key}: {val}' for item[0] in people.list()]
-            #print([f'{ident}: {name}') for item['id'], item] in people]
+            for person in people:
+                print(f"id is {person['id']} and name is {person['name']}")
             cache.set('db',people)
-            print(people[0].item['id'])
-            print(people[0].item['name'])
             return 'post complete'
 
         elif request.method == 'GET':
